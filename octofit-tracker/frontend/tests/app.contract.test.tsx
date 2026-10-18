@@ -69,6 +69,11 @@ describe('OctoFit presentation contract', () => {
         await waitFor(() => expect(screen.getByText(capability.emptyText)).toBeInTheDocument());
       });
 
+      it('announces successfully loaded data', async () => {
+        renderRoute(capability.route);
+        await waitFor(() => expect(screen.getByRole('status')).toHaveTextContent(/loaded/i));
+      });
+
       it('announces API failures as an accessible alert', async () => {
         vi.stubGlobal('fetch', vi.fn(async () => new Response(JSON.stringify({ message: 'Unavailable' }), { status: 503 })));
         renderRoute(capability.route);

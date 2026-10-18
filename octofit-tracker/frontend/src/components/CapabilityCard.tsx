@@ -60,11 +60,14 @@ export function CapabilityCard<T>({
         {state.status === 'error' && <p role="alert">Unable to load {title.toLowerCase()}: {state.message}</p>}
         {state.status === 'success' && state.items.length === 0 && <p>{emptyMessage}</p>}
         {state.status === 'success' && state.items.length > 0 && (
-          <ul className="list-group">
-            {state.items.map((item, index) => (
-              <li className="list-group-item" key={index}>{renderItem(item)}</li>
-            ))}
-          </ul>
+          <>
+            <p role="status">{title} loaded.</p>
+            <ul className="list-group">
+              {state.items.map((item, index) => (
+                <li className="list-group-item" key={index}>{renderItem(item)}</li>
+              ))}
+            </ul>
+          </>
         )}
       </div>
     </section>
